@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     });
   } catch (error) {
     // If any errors, log them and redirect back home
-    console.log(error);
+    console.log(error, 'There are no items in this pantry.');
     res.redirect('/');
   }
 });
