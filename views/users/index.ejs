@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users Index</title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1>All Users</h1>
+    <ul>
+        <% users.forEach(user => { %>
+          <li>
+            <strong>Name:</strong> <%= user.username %> <br>
+          </li>
+        <% }) %>
+      </ul>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

@@ -9,7 +9,7 @@ const User = require('../models/user.js');
 //
 router.get('/', async (req, res) => {
   try {
-    
+
     const currentUser = await User.findById(req.session.user._id);
 
     res.render('foods/index.ejs', {
@@ -20,16 +20,16 @@ router.get('/', async (req, res) => {
     res.redirect('/');
   }
 });
-  
-  router.get('/new', (req, res) => {
-    res.render('foods/new.ejs');
-  });
 
-  // controllers/applications.js`
+router.get('/new', (req, res) => {
+  res.render('foods/new.ejs');
+});
+
+// controllers/applications.js`
 
 router.post('/', async (req, res) => {
   try {
-  
+
     const currentUser = await User.findById(req.session.user._id);
     currentUser.foods.push(req.body);
     await currentUser.save();
@@ -46,7 +46,7 @@ router.get('/:foodId', async (req, res) => {
   try {
     const currentUser = await User.findById(req.session.user._id);
     const food = currentUser.foods.id(req.params.foodId);
-    
+
     res.render('foods/show.ejs', {
       food: food,
     });
@@ -61,13 +61,13 @@ router.get('/:foodId', async (req, res) => {
 
 router.delete('/:foodId', async (req, res) => {
   try {
-    
+
     const currentUser = await User.findById(req.session.user._id);
 
     currentUser.foods.id(req.params.foodId).deleteOne();
-   
+
     await currentUser.save();
- 
+
     res.redirect(`/users/${currentUser._id}/foods`);
   } catch (error) {
 
@@ -75,8 +75,39 @@ router.delete('/:foodId', async (req, res) => {
     res.redirect('/');
   }
 });
+// controllers/applications.js
+
+router.get('/:foodId/edit', async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id);
+    const food = currentUser.foods.id(req.params.foodId);
+    res.render('foods/edit.ejs', {
+      food: food,
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+  }
+});
+
+// controllers/applications.js`
+
+router.put('/:foodId', async (req, res) => {
+  try {
+
+    const currentUser = await User.findById(req.session.user._id);
+    const food = currentUser.foods.id(req.params.foodId);
+    food.set(req.body);
+    await currentUser.save();
+    res.redirect(
+      `/users/${currentUser._id}/foods/${req.params.foodId}`
+    );
+  } catch (error) {
+    console.log(error);
+    res.redirect('/');
+  }
+});
 
 
-  
 
 module.exports = router;
