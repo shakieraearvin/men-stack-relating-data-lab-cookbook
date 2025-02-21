@@ -10,5 +10,11 @@
   <body>
     <%- include('../partials/_navbar.ejs') %>
     <h1><%= food.name %></h1>
+    <form
+      action="/users/<%= user._id %>/foods/<%= food._id %>?_method=DELETE"
+      method="POST"
+    >
+      <button type="submit">Delete this food</button>
+    </form>
   </body>
 </html>
