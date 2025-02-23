@@ -8,13 +8,10 @@
   <body>
     <%- include('../partials/_navbar.ejs') %>
     <h1>All Users</h1>
-    <ul>
-        <% users.forEach(user => { %>
-          <li>
-            <strong>Name:</strong> <%= user.username %> <br>
-          </li>
-        <% }) %>
-      </ul>
+    <% users.forEach(user => { %>
+        <li><a href="/users/<%= user._id %>"><%= user.username %></a></li>
+      <!-- <% }) %> -->
+  </ul>
   </body>
 </html>
 
